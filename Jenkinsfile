@@ -1,3 +1,8 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+
 pipeline {
 
     agent any
@@ -99,8 +104,10 @@ pipeline {
           }
         }
 
-        post {
-           always {
+ 
+    }
+    post {
+        always {
             echo 'Slack Notifications.'
             slackSend channel: '#jenkins-cicd',
                 color: COLOR_MAP[currentBuild.currentResult],
@@ -108,7 +115,5 @@ pipeline {
             }        
 
         }
-
-    }
 
 }
